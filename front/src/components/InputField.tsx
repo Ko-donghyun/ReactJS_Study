@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {colors} from '../constants';
+import {mergeRefs} from '../utils';
 
 interface InputFieldProps extends TextInputProps {
   disabled?: boolean;
@@ -42,7 +43,7 @@ const InputField = forwardRef(
             //   ref?.current = node;
             //   innerRef.current = node;
             // }}
-            ref={}
+            ref={ref ? mergeRefs(innerRef, ref) : innerRef}
             editable={!disabled}
             placeholderTextColor={colors.GRAY_500}
             style={[styles.input, disabled && styles.disabled]}

@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import InputField from '../../components/InputField';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomButton from '../../components/CustomButton';
 import useForm from '../../hooks/useForm';
 import {validateLogin} from '../../utils';
+import {TextInput} from 'react-native-gesture-handler';
 
 interface LoginScreenProps {}
 
@@ -54,11 +55,14 @@ function LoginScreen({}: LoginScreenProps) {
     // console.log('values', values);
     console.log('values', login.values);
   };
+  const passwordRef = useRef<TextInput | null>(null);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <Text>로그인 스크린</Text>
         <InputField
+          autoFocus
           placeholder="이메일"
           // error={'이메일을 입력하세요'}
           error={login.errors.email}
@@ -67,13 +71,16 @@ function LoginScreen({}: LoginScreenProps) {
           inputMode="email"
           // value={email}
           // onChangeText={handleChangeEmail}
-
+          returnKeyType="next"
+          blurOnSubmit={false}
+          onSubmitEditing={() => passwordRef.current?.focus()}
           {...login.getTextInputProps('email')}
           // value={values.email}
           // onChangeText={text => handleChangeText('email', text)}
           // onBlur={() => handleBlur('email')}
         />
         <InputField
+          ref={passwordRef}
           placeholder="비밀번호"
           // error={'비밀번호를 입력하세요'}
           error={login.errors.password}
@@ -84,6 +91,9 @@ function LoginScreen({}: LoginScreenProps) {
           // value={password}
           // onChangeText={handleChangePassword}
 
+          returnKeyType="join"
+          blurOnSubmit={false}
+          onSubmitEditing={handleSubmit}
           {...login.getTextInputProps('password')}
           // value={values.password}
           // onChangeText={text => handleChangeText('password', text)}
