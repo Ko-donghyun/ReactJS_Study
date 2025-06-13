@@ -18,9 +18,10 @@ function SignupScreen() {
   const {signupMutation, loginMutation} = useAuth();
 
   const handleSumbit = () => {
-    console.log(signup.values);
+    console.log('signup:: ', signup.values);
 
     const {email, password} = signup.values;
+
     signupMutation.mutate(
       {email, password},
       {
