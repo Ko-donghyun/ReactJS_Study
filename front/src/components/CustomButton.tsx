@@ -1,3 +1,4 @@
+import {colors} from '@/constants';
 import React from 'react';
 import {
   Dimensions,
@@ -7,7 +8,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import {colors} from '../constants';
 import {makeViewDescriptorsSet} from 'react-native-reanimated/lib/typescript/reanimated2/ViewDescriptorsSet';
 
 interface CustomButtonProps extends PressableProps {
