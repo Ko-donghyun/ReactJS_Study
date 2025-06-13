@@ -13,6 +13,8 @@ import {
 // import AuthHomeScreen from './src/screens/AuthHomeScreen';
 // import AuthStackNavigator from './src/navigations/stack/AuthStackNavigator';
 import RootNavigator from './src/navigations/root/RootNavigator';
+import {QueryClientProvider} from '@tanstack/react-query';
+import queryClient from './src/api/queryClient';
 
 function App() {
   // const [name, setName] = useState('');
@@ -28,9 +30,11 @@ function App() {
   // };
 
   return (
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </QueryClientProvider>
     // <NavigationContainer>
     //   <SafeAreaView>
     //     <View style={styles.container}>

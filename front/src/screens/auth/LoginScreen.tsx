@@ -6,6 +6,7 @@ import CustomButton from '../../components/CustomButton';
 import useForm from '../../hooks/useForm';
 import {validateLogin} from '../../utils';
 import {TextInput} from 'react-native-gesture-handler';
+import useAuth from '../../hooks/queries/useAuth';
 
 interface LoginScreenProps {}
 
@@ -50,12 +51,14 @@ function LoginScreen({}: LoginScreenProps) {
   console.log(login.getTextInputProps('email'));
 
   const handleSubmit = () => {
-    console.log('email', email);
+    // console.log('email', email);
 
     // console.log('values', values);
-    console.log('values', login.values);
+    // console.log('values', login.values);
+    loginMutation.mutate(login.values);
   };
   const passwordRef = useRef<TextInput | null>(null);
+  const {loginMutation} = useAuth();
 
   return (
     <SafeAreaView style={styles.container}>
